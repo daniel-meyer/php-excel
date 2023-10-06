@@ -35,3 +35,8 @@ CREATE TABLE `dl_unique_fields` (
     PRIMARY KEY (`id`),
     UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
+UPDATE dl_event_fields
+    JOIN dl_unique_fields ON dl_unique_fields.name = dl_event_fields.name
+    SET dl_event_fields.type = dl_unique_fields.type;

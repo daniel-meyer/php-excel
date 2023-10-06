@@ -2,13 +2,13 @@
 
 namespace app\actions;
 
-use app\services\FieldExploder;
+use app\services\DLExporter;
 
-class Explodefields
+class Exporttodl
 {
     public function run(): void
     {
-        $service = new FieldExploder();
+        $service = new DLExporter();
         $service->process();
         echo '<div class="alert alert-success">Data processed successfully</div>';
     }

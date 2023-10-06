@@ -22,8 +22,8 @@
                 </table>
               </form>
               <button id="explodefields" class="btn btn-primary" >Explode fields</button>
-           <br />
-
+           <br /><br />
+              <button id="exporttodl" class="btn btn-primary" >Export to DL</button>
           </div>
           </div>
         </div>
@@ -66,6 +66,21 @@ $(document).ready(function(){
       success:function(data) {
         $('#message').html(data);
         $('#explodefields').text('Explode fields');
+      }
+    })
+  });
+
+  $('#exporttodl').on('click', function(event){
+    event.preventDefault();
+    $.ajax({
+      url:"controller.php?action=exporttodl",
+      method:"POST",
+      beforeSend:function(){
+        $('#exporttodl').text('Processing...');
+      },
+      success:function(data) {
+        $('#message').html(data);
+        $('#exporttodl').text('Export to DL');
       }
     })
   });
