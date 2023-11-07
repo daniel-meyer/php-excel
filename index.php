@@ -22,8 +22,10 @@
                 </table>
               </form>
               <button id="explodefields" class="btn btn-primary" >Explode fields</button>
-           <br /><br />
-              <button id="exporttodl" class="btn btn-primary" >Export to DL</button>
+              <br /><br />
+              <button id="merge" class="btn btn-primary" >Merge events</button>
+              <br /><br />
+              <button id="export" class="btn btn-primary" >Export to JSON</button>
           </div>
           </div>
         </div>
@@ -70,17 +72,32 @@ $(document).ready(function(){
     })
   });
 
-  $('#exporttodl').on('click', function(event){
+  $('#merge').on('click', function(event){
     event.preventDefault();
     $.ajax({
-      url:"controller.php?action=exporttodl",
+      url:"controller.php?action=merge",
       method:"POST",
       beforeSend:function(){
-        $('#exporttodl').text('Processing...');
+        $('#merge').text('Processing...');
       },
       success:function(data) {
         $('#message').html(data);
-        $('#exporttodl').text('Export to DL');
+        $('#merge').text('Merge events');
+      }
+    })
+  });
+
+  $('#export').on('click', function(event){
+    event.preventDefault();
+    $.ajax({
+      url:"controller.php?action=export",
+      method:"POST",
+      beforeSend:function(){
+        $('#export').text('Processing...');
+      },
+      success:function(data) {
+        $('#message').html(data);
+        $('#export').text('Export to JSON');
       }
     })
   });

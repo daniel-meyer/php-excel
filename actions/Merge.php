@@ -2,13 +2,13 @@
 
 namespace app\actions;
 
-use app\services\DLExporter;
+use app\services\MergeEvents;
 
-class Exporttodl
+class Merge
 {
     public function run(): void
     {
-        $service = new DLExporter();
+        $service = new MergeEvents();
         $service->process();
         echo '<div class="alert alert-success">Data processed successfully</div>';
     }

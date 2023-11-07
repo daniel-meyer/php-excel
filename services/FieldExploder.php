@@ -6,14 +6,9 @@ class FieldExploder
 {
     public function process(): void
     {
-        foreach ($this->fetchEvents() as $event) {
+        foreach (Repository::fetchEvents() as $event) {
             $this->processEvent($event['id'], $event['col2']);
         }
-    }
-
-    private function fetchEvents(): array
-    {
-        return DB::fetchAll("SELECT * FROM dl_xlsx_data WHERE col4 IS NULL OR col4 NOT LIKE '%external site%'");
     }
 
     private function processEvent(int $eventId, string $eventData): void
@@ -105,7 +100,7 @@ class FieldExploder
             } else {
                 // standard fields
                 $type = $this->getFieldType($value);
-                $id = $this->insertField($eventId, $key, $parentId, $type);
+                $id = $this->insertField($eventId, $key, $parentId, $type, $value);
             }
             if ($type) {
                 // go deeper
@@ -123,13 +118,14 @@ class FieldExploder
         };
     }
 
-    private function insertField(int $eventId, string $fieldName, $parentId, $type): int
+    private function insertField(int $eventId, string $fieldName, $parentId, $type, $value): int
     {
         return DB::insert('dl_event_fields', [
             'event_id' => $eventId,
             'parent_id' => $parentId,
             'name' => $fieldName,
-            'type' => $type
+            'type' => $type,
+            'value' => is_string($value) ? $value : null
         ]);
     }
 

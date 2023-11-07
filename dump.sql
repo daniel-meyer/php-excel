@@ -18,6 +18,7 @@ CREATE TABLE `dl_event_fields` (
     `event_id` int unsigned NOT NULL,
     `parent_id` int unsigned DEFAULT NULL,
     `name` varchar(255) NOT NULL,
+    `value` varchar(255) NOT NULL,
     `type` tinyint unsigned,
     PRIMARY KEY (`id`),
     KEY `parent` (`parent_id`),
@@ -40,3 +41,5 @@ CREATE TABLE `dl_unique_fields` (
 UPDATE dl_event_fields
     JOIN dl_unique_fields ON dl_unique_fields.name = dl_event_fields.name
     SET dl_event_fields.type = dl_unique_fields.type;
+
+UPDATE dl_event_fields SET value='' WHERE value=',';

@@ -1,3 +1,4 @@
 /vendor/
 .idea
 config.php
+/dl-tracker-config.json
